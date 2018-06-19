@@ -1,0 +1,23 @@
+.PictureCard {
+    width: 150px;
+    height: 150px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
+    transition: all .1s;
+    margin: 10px;
+    display: inline-block;
+}
+
+.PictureCard:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+}
+
+.PictureCard-number {
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
