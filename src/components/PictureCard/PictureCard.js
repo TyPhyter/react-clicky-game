@@ -2,25 +2,20 @@ import React, { Component } from 'react';
 import './PictureCard.css';
 
 export default class PictureCard extends Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-
-        }
-    }
-
-    shuffle = () => {
-        this.props.shuffleMethod();
+    handleCardClick = () => {
+        this.props.cardClickMethod();
     }
 
     render() {
         return (
-            <div className='PictureCard' onClick={this.shuffle}>
+            <div className={ "PictureCard " + this.props.animation }
+                onClick={ this.handleCardClick }
+                style={{ background : this.props.color }}>
                 {/* <img src={ this.props.src } alt=''/> */}
-                <div className='PictureCard-number'>
+                <h1 className='PictureCard-number'>
                     { this.props.number }
-                </div>
+                </h1>
             </div>
         )
     }

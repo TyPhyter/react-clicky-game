@@ -1,6 +1,9 @@
 .PictureCard {
-    width: 150px;
-    height: 150px;
+    width: 20%;
+    /* height: 150px; */
+    padding-top: 20%;
+    overflow: hidden;
+    position: relative;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
     transition: all .1s;
@@ -14,10 +17,20 @@
 }
 
 .PictureCard-number {
-    width: 100%;
-    height: 100%;
+    /* width: 100%; */
+    /* height: 100%; */
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0; 
     background: rgba(0,0,0,0);
     display: flex;
     justify-content: space-around;
     align-items: center;
+    color: white;
+}
+
+@media screen and (max-width: 792px) {
+    .PictureCard {
+        width: 25%;
+        padding-top: 25%;
+    }
 }
