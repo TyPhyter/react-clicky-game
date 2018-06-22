@@ -85,7 +85,8 @@ class App extends Component {
                     cardsArray: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
                     clickedCards: [],
                     score: 0,
-                    animationState: "shake shake-slow"
+                    animationState: "shake shake-slow",
+                    lastClicked: -1
                 });
             }, 1000);
         }
@@ -96,6 +97,7 @@ class App extends Component {
         const cards = cardsArray.map((elem, i) => {
 
             const number = cardsArray[i];
+
             //if we just clicked this one, remove the shake animation
             //prevents the hover effect from lingering on mobile
             if (number === this.state.lastClicked) {
