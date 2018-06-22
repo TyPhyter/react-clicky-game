@@ -50,6 +50,7 @@
 .App-settingsButton {
     position: relative;
     width: 32px;
+    cursor: pointer;
 }
 
 .container {

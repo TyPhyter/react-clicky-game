@@ -162,7 +162,11 @@ export default class App extends Component {
                         this.renderCards()
                     }
                 </section>
-                <Modal display={this.state.modalDisplay} handleDifficultyChange={this.handleDifficultyChange}/>
+
+                <Modal display={this.state.modalDisplay} 
+                    handleDifficultyChange={this.handleDifficultyChange}
+                    toggleModal={this.toggleModal}/>
+
             </main>
         );
     }
