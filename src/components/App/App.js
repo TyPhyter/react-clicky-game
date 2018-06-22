@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import PictureCard from './components/PictureCard/PictureCard';
-import colorsArray from './colorsArray';
+import PictureCard from '../PictureCard/PictureCard';
+import Modal from '../Modal/Modal';
+import colorsArray from '../../colorsArray';
+import settingsButton from '../../settings.png'
 
-class App extends Component {
+export default class App extends Component {
 
     constructor(props) {
 
@@ -16,8 +18,10 @@ class App extends Component {
             colorsArray: colorsArray,
             score: 0,
             highScore: 0,
-            animationState: "shake shake-slow",
+            animationState: 'shake shake-slow',
             lastClicked: 0,
+            difficulty: 'normal',
+            modalDisplay: 'none',
         }
         // bindings
         // not sure if I like this or the alternatives better
@@ -65,18 +69,15 @@ class App extends Component {
                     if (this.state.score > this.state.highScore) {
                         this.setState({
                             highScore: this.state.score
-                        },
-                            () => {
-                                console.log(this.state.highScore);
-                            });
+                        });
                     }
-                    console.log(this.state.score);
                 });
 
         } else {
             // alert('You already clicked that!');
             this.setState({
-                animationState: "shake shake-opacity shake-constant"
+                animationState: 'shake shake-opacity shake-constant',
+                lastClicked: -1
             });
 
             //stop animation and reset after delay
@@ -85,15 +86,16 @@ class App extends Component {
                     cardsArray: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
                     clickedCards: [],
                     score: 0,
-                    animationState: "shake shake-slow",
-                    lastClicked: -1
+                    animationState: 'shake shake-slow',
                 });
             }, 1000);
         }
     }
 
     renderCards() {
+
         const cardsArray = [...this.state.cardsArray];
+        let animation;
         const cards = cardsArray.map((elem, i) => {
 
             const number = cardsArray[i];
@@ -101,58 +103,67 @@ class App extends Component {
             //if we just clicked this one, remove the shake animation
             //prevents the hover effect from lingering on mobile
             if (number === this.state.lastClicked) {
-
-                return (
-                    <PictureCard
-                        key={number}
-                        number={number}
-                        cardClickMethod={() => { this.handleCardClick(cardsArray[i]) }}
-                        color={this.state.colorsArray[number - 1]}
-                        animation=""
-                        alt=""
-                    />
-                )
-
+                animation = "";
             } else {
-
-                return (
-
-                    <PictureCard
-                        key={number}
-                        number={number}
-                        cardClickMethod={() => { this.handleCardClick(cardsArray[i]) }}
-                        color={this.state.colorsArray[number - 1]}
-                        animation={this.state.animationState}
-                        alt=""
-                    />
-                )
+                animation = this.state.animationState;
             }
+
+            return (
+                <PictureCard
+                    key={number}
+                    number={number}
+                    cardClickMethod={() => { this.handleCardClick(cardsArray[i]) }}
+                    color={this.state.colorsArray[number - 1]}
+                    animation={animation}
+                    alt=""
+                    difficulty={this.state.difficulty}
+                />
+            )
         });
         return cards;
     }
 
+    toggleModal = () => {
+        const display = this.state.modalDisplay === "none" ? "block" : "none";
+        this.setState({
+            modalDisplay: display
+        });
+    }
 
+    handleDifficultyChange = (value) => {
+        let difficulty;
+        if (value === '0') {
+            difficulty = 'easy'
+        } else if (value === '1') {
+            difficulty = 'normal'
+        } else {
+            difficulty = 'hard'
+        }
 
+        console.log(value, difficulty);
+        this.setState({
+            difficulty: difficulty
+        });
+    }
 
     render() {
         return (
-            <div className="App">
+            <main className="App">
+
                 <header className="App-header">
                     <h1 className="App-title">Color Clicker</h1>
                     <h2 className="App-score">Score: {this.state.score}</h2>
                     <h2 className="App-highScore">High Score: {this.state.highScore}</h2>
+                    <img className="App-settingsButton" src={ settingsButton } onClick={ this.toggleModal } alt=""/>
                 </header>
-                {/* <p className="App-intro">
-                </p> */}
-                <div className='container'>
+
+                <section className='container'>
                     {
                         this.renderCards()
                     }
-                </div>
-
-            </div>
+                </section>
+                <Modal display={this.state.modalDisplay} handleDifficultyChange={this.handleDifficultyChange}/>
+            </main>
         );
     }
 }
-
-export default App;

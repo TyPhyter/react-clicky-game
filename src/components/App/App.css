@@ -1,4 +1,5 @@
 .App {
+    position: relative;
     text-align: center;
     background: #111;
     min-height: 100vh;
@@ -43,6 +44,12 @@
 .App-highScore {
     display: inline-block;
     font-size: larger;
+    margin-right: 5%;
+}
+
+.App-settingsButton {
+    position: relative;
+    width: 32px;
 }
 
 .container {
@@ -59,5 +66,14 @@
 
     .App-title {
         margin: auto;
+        font-size: 40px;
+        margin-right: 20px;
     }
+
+    .App-settingsButton {
+        position: absolute;
+        right: 20px;
+        top: 30px;
+    }
+
 }
