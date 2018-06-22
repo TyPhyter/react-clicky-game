@@ -28,6 +28,10 @@
     color: white;
 }
 
+.noAnimation {
+    transition: none;
+}
+
 @media screen and (max-width: 792px) {
     .PictureCard {
         width: 25%;

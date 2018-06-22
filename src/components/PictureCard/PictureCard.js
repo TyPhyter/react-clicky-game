@@ -8,6 +8,7 @@ export default class PictureCard extends Component {
     }
 
     render() {
+
         return (
             <div className={ "PictureCard " + this.props.animation }
                 onClick={ this.handleCardClick }
@@ -18,5 +19,6 @@ export default class PictureCard extends Component {
                 </h1>
             </div>
         )
+      
     }
 }

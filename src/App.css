@@ -3,7 +3,7 @@
     background: #111;
     min-height: 100vh;
     overflow: hidden;
-
+    font-family: 'Galindo', cursive;
 }
 
 .App-logo {
@@ -19,7 +19,10 @@
 }
 
 .App-title {
-    font-size: 1.5em;
+    display: inline-block;
+    margin-right: 10%;
+    font-family: 'Jua', sans-serif;
+    font-size: 50px;
 }
 
 .App-intro {
@@ -33,11 +36,13 @@
 
 .App-score {
     display: inline-block;
-    margin-right: 10%;
+    margin-right: 5%;
+    font-size: larger;
 }
 
 .App-highScore {
     display: inline-block;
+    font-size: larger;
 }
 
 .container {
@@ -49,5 +54,10 @@
 @media screen and (max-width: 792px) {
     .container {
         width: 90%;
+        margin-top: 10%
+    }
+
+    .App-title {
+        margin: auto;
     }
 }

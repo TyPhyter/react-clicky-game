@@ -16,7 +16,8 @@ class App extends Component {
             colorsArray: colorsArray,
             score: 0,
             highScore: 0,
-            animationState: "shake shake-slow"
+            animationState: "shake shake-slow",
+            lastClicked: 0,
         }
         // bindings
         // not sure if I like this or the alternatives better
@@ -48,13 +49,15 @@ class App extends Component {
     */
     handleCardClick(clickedNumber) {
 
+
         if (!this.state.clickedCards.includes(clickedNumber)) {
 
             this.shuffle();
 
             this.setState({
                 clickedCards: [...this.state.clickedCards, clickedNumber],
-                score: this.state.score + 1
+                score: this.state.score + 1,
+                lastClicked: clickedNumber
             },
                 //callback for setState, 
                 //should probably use a lifecycle event instead apparently
@@ -73,16 +76,16 @@ class App extends Component {
         } else {
             // alert('You already clicked that!');
             this.setState({
-                animationState : "shake shake-opacity shake-constant"
+                animationState: "shake shake-opacity shake-constant"
             });
 
             //stop animation and reset after delay
-            setTimeout(()=>{
+            setTimeout(() => {
                 this.setState({
-                    cardsArray : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-                    clickedCards : [],
-                    score : 0,
-                    animationState : "shake shake-slow"
+                    cardsArray: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                    clickedCards: [],
+                    score: 0,
+                    animationState: "shake shake-slow"
                 });
             }, 1000);
         }
@@ -93,18 +96,35 @@ class App extends Component {
         const cards = cardsArray.map((elem, i) => {
 
             const number = cardsArray[i];
+            //if we just clicked this one, remove the shake animation
+            //prevents the hover effect from lingering on mobile
+            if (number === this.state.lastClicked) {
 
-            return (
-
+                return (
                     <PictureCard
-                        key={cardsArray[i]}
+                        key={number}
                         number={number}
                         cardClickMethod={() => { this.handleCardClick(cardsArray[i]) }}
                         color={this.state.colorsArray[number - 1]}
-                        animation={ this.state.animationState }
+                        animation=""
                         alt=""
                     />
-            )
+                )
+
+            } else {
+
+                return (
+
+                    <PictureCard
+                        key={number}
+                        number={number}
+                        cardClickMethod={() => { this.handleCardClick(cardsArray[i]) }}
+                        color={this.state.colorsArray[number - 1]}
+                        animation={this.state.animationState}
+                        alt=""
+                    />
+                )
+            }
         });
         return cards;
     }
@@ -116,6 +136,7 @@ class App extends Component {
         return (
             <div className="App">
                 <header className="App-header">
+                    <h1 className="App-title">Color Clicker</h1>
                     <h2 className="App-score">Score: {this.state.score}</h2>
                     <h2 className="App-highScore">High Score: {this.state.highScore}</h2>
                 </header>
