@@ -151,10 +151,16 @@ export default class App extends Component {
             <main className="App">
 
                 <header className="App-header">
+
                     <h1 className="App-title">Color Clicker</h1>
-                    <h2 className="App-score">Score: {this.state.score}</h2>
-                    <h2 className="App-highScore">High Score: {this.state.highScore}</h2>
+
+                    <div className="App-scoreContainer">
+                        <h2 className="App-score">Score: {this.state.score}</h2>
+                        <h2 className="App-highScore">High Score: {this.state.highScore}</h2>
+                    </div>
+                
                     <img className="App-settingsButton" src={ settingsButton } onClick={ this.toggleModal } alt=""/>
+                
                 </header>
 
                 <section className='container'>

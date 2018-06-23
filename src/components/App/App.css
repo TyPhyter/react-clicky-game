@@ -21,13 +21,17 @@
 
 .App-title {
     display: inline-block;
-    margin-right: 10%;
+    /* margin-right: 10%; */
     font-family: 'Jua', sans-serif;
     font-size: 50px;
 }
 
 .App-intro {
+    text-align: center;
     font-size: large;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 @keyframes App-logo-spin {
@@ -35,20 +39,27 @@
     to { transform: rotate(360deg); }
 }
 
-.App-score {
+.App-scoreContainer {
     display: inline-block;
-    margin-right: 5%;
-    font-size: larger;
+    width: 100%;
+    margin: auto;
+}
+
+.App-score {
+    display: inline;
+    margin-right: 1%;
+    font-size: large;
 }
 
 .App-highScore {
-    display: inline-block;
-    font-size: larger;
-    margin-right: 5%;
+    display: inline;
+    font-size: large;
 }
 
 .App-settingsButton {
-    position: relative;
+    position: absolute;
+    right: 20px;
+    top: 30px;
     width: 32px;
     cursor: pointer;
 }
@@ -68,7 +79,6 @@
     .App-title {
         margin: auto;
         font-size: 40px;
-        margin-right: 20px;
     }
 
     .App-settingsButton {
